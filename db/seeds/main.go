@@ -24,6 +24,7 @@ import (
 	"github.com/qor/publish"
 	"github.com/qor/qor"
 	"github.com/qor/qor-example/app/models"
+	"github.com/qor/qor-example/config"
 	"github.com/qor/qor-example/config/admin"
 	"github.com/qor/qor-example/db"
 	"github.com/qor/seo"
@@ -62,6 +63,9 @@ var (
 )
 
 func main() {
+	if config.Config.DB.Adapter == "sqlite3" {
+		db.DB.Exec("PRAGMA synchronous =OFF;")
+	}
 	Notification.RegisterChannel(database.New(&database.Config{}))
 	TruncateTables(Tables...)
 	createRecords()

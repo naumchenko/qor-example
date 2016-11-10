@@ -1,4 +1,4 @@
 db:
-  adapter: mysql
+  adapter: sqlite3
   name: qor_example
   user: root
